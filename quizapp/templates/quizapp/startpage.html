@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if pk == 1 %}
+<a href="{% url 'quizapp:detail' pk=pk %}"><button class='btn btn-success'> Start Quiz</button></a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+<ul>
+  {% for question in question_list %}
+  <li>
+    <a href="{% url 'quizapp:detail' pk=question.pk %}"> {{ question.id }} </a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

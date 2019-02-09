@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %} {% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %} {% if user.is_authenticated %}
+
+<div class="container">
+  <form method="GET" action="{% url 'quizapp:choice' pk=question.id %}">
+    {% csrf_token %}
+    <h2>{{ question.question_text }}</h2>
+    <div class="row">
+      {% for ans in answer %}
+      <div class="col-lg-4 col-md-4 col-sm-12 mt-4">
+        <input type="radio" name="choice" value="{{ ans.id }}" />
+        {% if ans.answer_image %}
+        <img
+          src="{{ ans.answer_image.url }}"
+          alt="img"
+          width="150px"
+          height="150px"
+        />
+        {% else %}
+        <p>{{ ans.answer_text }}</p>
+        {% endif %}
+      </div>
+      {%endfor %} <br /><br />
+    </div>
+    <br /><br />
+    <center>
+      <button class="btn btn-success" type="submit">Submit</button>
+    </center>
+  </form>
+</div>
+{% endif %} {% endblock %}

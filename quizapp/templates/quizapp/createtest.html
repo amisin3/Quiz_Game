@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <h1>{{ quest }}</h1>
+    {% for answer in ans %}
+    <input type="radio" name='choose' value="{{ answer.answer_text }}">{{ answer.answer_text }}
+    {% endfor %}
+    <button class="btn btn-success" type="submit">Submit</button>
+</form>
+
+{% endblock %}
