@@ -141,11 +141,14 @@ def create_test_view(request, pk):
     }
     if request.POST:
         correct_ans = request.POST.get('choose')
-        print(correct_ans)
+        # try_ans = request.POST.get('try')
+        # print("This is what i want")
+        print(try_ans)
+        # print(correct_ans)
         if correct_ans:
             # print(ans.get(right_ans=True).exists())
             prev_ans = ans.get(right_ans=True)
-            print(prev_ans)
+            # print(prev_ans)
             if prev_ans == None:
                 new_pk = int(pk) + 1
                 new_ans = ans.get(answer_text=correct_ans)
@@ -153,7 +156,7 @@ def create_test_view(request, pk):
             elif prev_ans != correct_ans:
                 new_pk = int(pk) + 1
                 new_ans = ans.get(answer_text=correct_ans)
-                print(new_ans)
+                # print(new_ans)
                 new_ans.update_ans()
                 prev_ans.undo_ans()
             answer = Answer.objects.filter(answer_text=correct_ans)

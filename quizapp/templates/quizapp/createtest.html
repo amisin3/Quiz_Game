@@ -2,13 +2,27 @@
 
 {% block content %}
 
-<form method="POST">
-    {% csrf_token %}
-    <h1>{{ quest }}</h1>
-    {% for answer in ans %}
-    <input type="radio" name='choose' value="{{ answer.answer_text }}">{{ answer.answer_text }}
-    {% endfor %}
-    <button class="btn btn-success" type="submit">Submit</button>
-</form>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <h1>{{ quest }}</h1>
+        <div class="row">
+            {% for answer in ans %}
+            <div class="card col-lg-4 col-md-4 col-sm-12 mt-4" style="width:150px; height:200px;">
+                <label>
+                    <input type="radio" name='choose' value="{{ answer.answer_text }}">
+                    {% if answer.answer_image %}
+                    <img src="{{ answer.answer_image.url }}" value="{{ answer.answer_text}}" name="choose" alt="img"
+                        width="auto" height="180px" />
+                    {% else %}
+                </label>
+                <p>{{ answer.answer_text }}</p>
+                {% endif %}
 
+            </div>
+            {% endfor %}
+        </div><br> <br>
+        <center><button class="btn btn-success" type="submit">Submit</button></center>
+    </form>
+</div>
 {% endblock %}

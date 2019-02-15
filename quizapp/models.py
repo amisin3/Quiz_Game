@@ -41,3 +41,19 @@ class Result(models.Model):
 
     def get_absolute_url(self):
         return redirect("quizapp:detail", pk=self.pk)
+
+
+class User_specific_model(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    user_answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+
+
+# if __name__ == '__main__':
+#     n = int(input())
+#     student_marks = {}
+#     for _ in range(n):
+#         name, *line = input().split()
+#         scores = list(map(float, line))
+#         student_marks[name] = scores
+#     query_name = input()
