@@ -1,0 +1,23 @@
+.heading1 {
+    text-align: center;
+
+}
+
+.error {
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.butt {
+    margin-left: 500px;
+
+}
+
+.hello {
+    background-color: black;
+}
+
+input[type='radio']:checked+img {
+    border: 10px solid #3CAEA3;
+}

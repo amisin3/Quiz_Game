@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 
 
 def start_page(request):
+    
     return render(request, "quizapp/startpage.html", {})
 
 
@@ -18,18 +19,35 @@ def list_page(request):
     quest = Question.objects.filter(pk=1)
     quest_pk = quest.values('pk')[0].get('pk')
     print(quest_pk)
-    # q = quest.values('question_text')
+    if request.POST:
+        name  = request.POST.get('username')
+        print(name)
+        if name == '' or name == None:
+            messages.error(request, "Please enter a username")
+        else:
+            messages.success(request, "Username is: %s"%name)
+            return redirect('quizapp:detail', pk=quest_pk)
     context = {
         'pk': quest_pk,
         'question': quest,
-    }
+        }
     return render(request, 'quizapp/startpage.html', context)
+    # q = quest.values('question_text')
+    
 
 def create_list(request):
     quest = Question.objects.filter(pk=1)
     quest_pk = quest.values('pk')[0].get('pk')
     print(quest_pk)
     # q = quest.values('question_text')
+    if request.POST:
+        name  = request.POST.get('username')
+        print(name)
+        if name == '' or name == None:
+            messages.error(request, "Please enter a username")
+        else:
+            messages.success(request, "Username is: %s"%name)
+            return redirect('quizapp:create', pk=quest_pk)
     context = {
         'pk': quest_pk,
         'question': quest,
@@ -116,7 +134,7 @@ def choice(request, pk):
     if new_pk <= 10:
         return redirect('quizapp:detail', pk=new_pk)
     else:
-        p = Result(user=request.user, score=points)
+        p = Result(score=points)
         p.save()
         return redirect('quizapp:results')
 
@@ -143,22 +161,26 @@ def create_test_view(request, pk):
         correct_ans = request.POST.get('choose')
         # try_ans = request.POST.get('try')
         # print("This is what i want")
-        print(try_ans)
+        # print(try_ans)
         # print(correct_ans)
         if correct_ans:
             # print(ans.get(right_ans=True).exists())
-            prev_ans = ans.get(right_ans=True)
-            # print(prev_ans)
-            if prev_ans == None:
-                new_pk = int(pk) + 1
-                new_ans = ans.get(answer_text=correct_ans)
-                new_ans.update_ans()
-            elif prev_ans != correct_ans:
-                new_pk = int(pk) + 1
-                new_ans = ans.get(answer_text=correct_ans)
-                # print(new_ans)
-                new_ans.update_ans()
-                prev_ans.undo_ans()
+            # if ans.get(right_ans=True):
+            #     prev_ans = ans.get(right_ans=True)
+            # # print(prev_ans)
+            # if prev_ans == None:
+            #     new_pk = int(pk) + 1
+            #     new_ans = ans.get(answer_text=correct_ans)
+            #     new_ans.update_ans()
+            # elif prev_ans != correct_ans:
+            #     new_pk = int(pk) + 1
+            #     new_ans = ans.get(answer_text=correct_ans)
+            #     # print(new_ans)
+            #     new_ans.update_ans()
+            #     prev_ans.undo_ans()
+            new_pk = int(pk) + 1
+            new_ans = ans.get(answer_text=correct_ans)
+            new_ans.update_ans()
             answer = Answer.objects.filter(answer_text=correct_ans)
             answer.right_ans = True
         if new_pk <= 10:

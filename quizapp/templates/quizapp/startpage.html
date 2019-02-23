@@ -1,7 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% load staticfiles %}
 {% if pk == 1 %}
-<a href="{% url 'quizapp:detail' pk=pk %}"><button class='btn btn-success'> Start Quiz</button></a>
+
+<!-- <div class="px-auto mx-auto my-5"> -->
+<div class="container">
+    <!-- <div class="alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+    </div> -->
+    <h2 class="mx-auto mt-5 px-auto alert-primary heading1">Test Your Friendship</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% for message in messages %}
+        {% if message|safe == 'Please enter a username' %}
+        <p class='error alert-danger'>{{ message|safe }}</p>
+        {% endif %}
+        {% endfor %}
+        <div class="input-group mb-3">
+            <input type="text" class='form-control' placeholder="Enter Your Name" name="username" aria-label="Recipient's username"
+                aria-describedby="button-addon2"><br><br>
+            <div class="input-group-append">
+                <!-- <button class="btn btn-success" type="button">Start Quiz</button> -->
+            </div>
+        </div>
+
+        <!-- <input type="text" placeholder="Enter Your Name" name="username" style="border:2px solid black;"><br><br> -->
+
+        <button class='btn btn-success butt'> Start Quiz</button>
+    </form>
+</div>
+<!-- </div> -->
 {% endif %}
 {% endblock %}

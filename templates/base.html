@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 
 <head>
@@ -11,18 +11,20 @@
     <title>Base</title>
 </head>
 
-<body>
-    <nav class='navbar'>
-        <a class="nav-brand" href="{% url 'index' %}">Home Page</a>
-        <ul>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'quizapp:list' %}">Give A Test</a></li>
-            <li><a href="{% url 'quizapp:hello' %}">Create Test</a></li>
-            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+<body class="bg-secondary">
+    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+        <a class="navbar-brand font-weight-bold" href="{% url 'index' %}">Home</a>
+        <ul class="navbar-nav">
+            <!-- {% if user.is_authenticated %}
+            <li class="nav-item"><a href="{% url 'quizapp:list' %}" class="font-weight-bold nav-link">Give A Test</a></li>
+            <li class="nav-item"><a href="{% url 'quizapp:hello' %}" class="font-weight-bold nav-link">Create Test</a></li>
+            <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="font-weight-bold nav-link">Logout</a></li>
             {% else %}
-            <li><a href="{% url 'accounts:login' %}">Login</a></li>
-            <li><a href="{% url 'accounts:signup' %}">SignUp</a></li>
-            {% endif %}
+            <li class="nav-item"><a href="{% url 'accounts:login' %}" class="font-weight-bold nav-link">Login</a></li>
+            <li class="nav-item"><a href="{% url 'accounts:signup' %}" class="font-weight-bold nav-link">SignUp</a></li>
+            {% endif %} -->
+            <li class="nav-item"><a href="{% url 'quizapp:list' %}" class="font-weight-bold nav-link">Give A Test</a></li>
+            <li class="nav-item"><a href="{% url 'quizapp:hello' %}" class="font-weight-bold nav-link">Create Test</a></li>
         </ul>
     </nav>
 

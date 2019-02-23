@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 
 <div class="container">
     <form method="POST">
         {% csrf_token %}
-        <h1>{{ quest }}</h1>
+        <h1 class="ml-5 mt-3 text-light">{{ quest }}</h1>
         <div class="row">
             {% for answer in ans %}
-            <div class="card col-lg-4 col-md-4 col-sm-12 mt-4" style="width:150px; height:200px;">
+            <div class="card bg-dark col-lg-3 col-md-4 col-sm-12 mt-3 py-2 px-auto ml-5" style="width:250px;">
                 <label>
-                    <input type="radio" name='choose' value="{{ answer.answer_text }}">
+                    <input type="radio" name='choose' style="width:0px; height:0px; opacity: 0px;" value="{{ answer.answer_text }}">
                     {% if answer.answer_image %}
                     <img src="{{ answer.answer_image.url }}" value="{{ answer.answer_text}}" name="choose" alt="img"
-                        width="auto" height="180px" />
+                        width="250px" height="180px" />
                     {% else %}
                 </label>
                 <p>{{ answer.answer_text }}</p>

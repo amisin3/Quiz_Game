@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<h1>Results {% for result in result_list %}
+<h1>Results
+    {% for result in result_list %}
     {{ result.score }}
     {% endfor %}
 </h1>

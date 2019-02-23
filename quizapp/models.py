@@ -33,11 +33,11 @@ class Answer(models.Model):
         self.save()
 
 class Result(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField()
 
     def __str__(self):
-        return self.user.username
+        return str(self.user.score)
 
     def get_absolute_url(self):
         return redirect("quizapp:detail", pk=self.pk)

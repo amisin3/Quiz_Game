@@ -2,6 +2,23 @@
 {% block content %}
 
 {% if pk == 1 %}
-<a href="{% url 'quizapp:create' pk=pk %}"><button class='btn btn-success'> Start Quiz</button></a>
+<!-- <a href="{% url 'quizapp:create' pk=pk %}"><button class='btn btn-success'> Start Quiz</button></a> -->
+<div class="px-auto mx-auto my-5">
+    <h2 class="mx-auto px-auto alert-primary heading1">Test Your Friendship</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% for message in messages %}
+        {% if message|safe == 'Please enter a username' %}
+        <p class="error alert-danger">{{ message|safe }}</p>
+        {% endif %}
+        {% endfor %}
+        <input type="text" class='form-control' placeholder="Enter Your Name" name="username" aria-label="Recipient's username"
+            aria-describedby="button-addon2"><br><br>
+
+        <!-- <input type="text" placeholder="Enter Your Name" name="username" style="border:2px solid black;"><br><br> -->
+
+        <button class='btn btn-success butt'> Start Quiz</button>
+    </form>
+</div>
 {% endif %}
 {% endblock %}
